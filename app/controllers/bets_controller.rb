@@ -1,7 +1,6 @@
 class BetsController < ApplicationController
   def index
     @table = table_query
-    @games_by_date = games_by_date
     @latest_games = latest_games
   end
 
