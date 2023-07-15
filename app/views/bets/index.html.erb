@@ -1,4 +1,4 @@
-<div class="row bg-white border-radius mt-5">
+<div class="row bg-white border-radius mt-4">
   <div class="col-lg-12">
     <h3 class="text-center p-3">Tabell</h3>
 
@@ -28,16 +28,38 @@
   </div>
 </div>
 
-<div class="row mt-5">
-  <div class="col-lg-6 ps-0">
-    <div class="col-lg bg-white border-radius">
-      <h3 class="text-center p-3">Senaste omgång</h3>
-    </div>
-  </div>
+<div class="row bg-white border-radius mt-4">
+  <div class="col-lg-12">
+    <h3 class="text-center p-3">Senaste omgång</h3>
 
-    <div class="col-lg-6 pe-0">
-      <div class="col-lg bg-white border-radius">
-        <h3 class="text-center p-3">Kommande omgång</h3>
-      </div>
-    </div>
+    <% @latest_games.each do |game| %>
+        <div class="d-flex justify-content-center align-items-center p-3">
+          <div style="width: calc(50% - 70px);">
+            <p class="text-end my-auto pe-3"><%= game.home_team %></p>
+          </div>
+
+          <div style="width: 40px;">
+            <%= image_tag("flags/nederlanderna.png", size: "32x32", class: "mx-auto my-auto d-block") %>
+          </div>
+
+          <div style="width: 60px;">
+            <p class="text-center my-auto"><%= game.home_team_score %> - <%= game.away_team_score %></p>
+          </div>
+
+          <div style="width: 40px;">
+            <%= image_tag("flags/norge.png", size: "32x32") %>
+          </div>
+
+          <div style="width: calc(50% - 70px);">
+            <p class="text-start my-auto ps-3"><%= game.away_team %></p>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row bg-white border-radius mt-4">
+  <div class="col-lg-12">
+    <h3 class="text-center p-3">Kommande omgång</h3>
+  </div>
 </div>

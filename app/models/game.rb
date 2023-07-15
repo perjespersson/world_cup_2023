@@ -1,5 +1,11 @@
 class Game < ApplicationRecord
   has_many :bets
-  belongs_to :home_team, class_name: 'User'
-  belongs_to :away_team, class_name: 'User'
+
+  def home_team
+    Team.find(self.home_team_id).name
+  end
+
+  def away_team
+    Team.find(self.away_team_id).name
+  end
 end

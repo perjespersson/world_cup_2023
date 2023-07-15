@@ -1,11 +1,13 @@
 <div class="row bg-white border-radius mt-5">
   <div class="col-lg-12 p-0">
     <h3 class="text-center p-3">Matcher</h3>
+
     <% @games_by_date.each do |row| %>
       <h5 class="border-bottom border-top p-3"><%= row["date"] %></h5>
 
       <% row["games"].each do |game| %>
         <!-- If not played, show time. Otherwise score -->
+        <!-- TODO: Make it into a partial? -->
         <div class="d-flex justify-content-center align-items-center p-3">
           <div style="width: calc(50% - 70px);">
             <p class="text-end my-auto pe-3"><%= game[2] %></p>
