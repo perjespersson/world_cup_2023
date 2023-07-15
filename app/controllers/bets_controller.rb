@@ -2,6 +2,7 @@ class BetsController < ApplicationController
   def index
     @table = table_query
     @latest_games = latest_games
+    @upcoming_games = upcoming_games
   end
 
   private
@@ -59,6 +60,11 @@ class BetsController < ApplicationController
 
   def latest_games
     latest_date = Game.where.not(home_team_score: nil, away_team_score: nil).order(date: :desc).limit(1).pluck(:date)
-    Game.where(date: latest_date)
+    Game.where(date: latest_date).order(time: :desc)
+  end
+
+  def upcoming_games
+    latest_date = Game.where(home_team_score: nil, away_team_score: nil).order(date: :desc).limit(1).pluck(:date)
+    Game.where(date: latest_date).order(time: :desc)
   end
 end
