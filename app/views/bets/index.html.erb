@@ -1,9 +1,77 @@
-<p style="color: green"><%= notice %></p>
+<div class="row bg-white border-radius mt-5">
+  <div class="col-lg-12">
+    <h3 class="text-center p-3">Tabell</h3>
 
-<h1>Bets</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Namn</th>
+          <th scope="col">Antal bet</th>
+          <th scope="col">Vinster</th>
+          <th scope="col">Förluster</th>
+          <th scope="col">Poäng</th>
+        </tr>
+      </thead>
 
-<div id="bets">
-  <% @bets.each do |bet| %>
-    <p> <%= bet.bet %>
-  <% end %>
+      <% @table.each do |row| %>
+        <tr>
+          <td><%= row["rank"] %></td>
+          <td><%= row["name"] %></td>
+          <td><%= row["total_bets"] %></td>
+          <td><%= row["wins"] %></td>
+          <td><%= row["losses"] %></td>
+          <td><%= row["points"] %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-lg-6 ps-0">
+    <div class="col-lg bg-white border-radius">
+      <h3 class="text-center p-3">Senaste omgång</h3>
+    </div>
+  </div>
+
+    <div class="col-lg-6 pe-0">
+      <div class="col-lg bg-white border-radius">
+        <h3 class="text-center p-3">Kommande omgång</h3>
+      </div>
+    </div>
+</div>
+
+<div class="row bg-white border-radius mt-5">
+  <div class="col-lg-12 p-0">
+    <h3 class="text-center p-3">Matcher</h3>
+    <% @games_by_date.each do |row| %>
+      <h5 class="border-bottom border-top p-3"><%= row["date"] %></h5>
+
+      <% row["games"].each do |game| %>
+        <!-- If not played, show time. Otherwise score -->
+        <div class="d-flex justify-content-center align-items-center p-3">
+          <div style="width: calc(50% - 70px);">
+            <p class="text-end my-auto pe-3"><%= game[2] %></p>
+          </div>
+
+          <div style="width: 40px;">
+            <%= image_tag("flags/nederlanderna.png", size: "32x32", class: "mx-auto my-auto d-block") %>
+          </div>
+
+          <div style="width: 60px;">
+            <p class="text-center my-auto"><%= game[0] %> - <%= game[1] %></p>
+          </div>
+
+          <div style="width: 40px;">
+            <%= image_tag("flags/norge.png", size: "32x32") %>
+          </div>
+
+          <div style="width: calc(50% - 70px);">
+            <p class="text-start my-auto ps-3"><%= game[3] %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>

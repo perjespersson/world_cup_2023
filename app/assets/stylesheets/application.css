@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  background-color: #F2F2F2;
+}
+
+.border-radius {
+  border-radius: 20px;
+}
+
+.table {
+  background-color: transparent !important;
+}
+
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 940px;
+}
