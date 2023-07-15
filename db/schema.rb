@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_14_110342) do
     t.integer "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "bet"
   end
 
   create_table "games", force: :cascade do |t|
@@ -31,7 +32,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_14_110342) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "game_type"
-    t.string "result"
   end
 
   create_table "teams", force: :cascade do |t|
