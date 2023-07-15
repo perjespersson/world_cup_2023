@@ -1,0 +1,9 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Bets</h1>
+
+<div id="bets">
+  <% @bets.each do |bet| %>
+    <p> <%= bet.bet %>
+  <% end %>
+</div>
