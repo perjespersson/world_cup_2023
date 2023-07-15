@@ -1,4 +1,4 @@
-<div class="row bg-white border-radius mt-5">
+<div class="row bg-white border-radius mt-4">
   <div class="col-lg-12 p-0">
     <h3 class="text-center p-3">Matcher</h3>
 
@@ -6,8 +6,6 @@
       <h5 class="border-bottom border-top p-3"><%= row["date"] %></h5>
 
       <% row["games"].each do |game| %>
-        <!-- If not played, show time. Otherwise score -->
-        <!-- TODO: Make it into a partial? -->
         <div class="d-flex justify-content-center align-items-center p-3">
           <div style="width: calc(50% - 70px);">
             <p class="text-end my-auto pe-3"><%= game[2] %></p>
@@ -18,7 +16,11 @@
           </div>
 
           <div style="width: 60px;">
-            <p class="text-center my-auto"><%= game[0] %> - <%= game[1] %></p>
+            <% if game[0].nil? %>
+              <p class="text-center my-auto"><%= DateTime.parse(game[4]).strftime("%H:%M") %></p>
+            <% else %>
+              <p class="text-center my-auto"><%= game[0] %> - <%= game[1] %></p>
+            <% end %>
           </div>
 
           <div style="width: 40px;">

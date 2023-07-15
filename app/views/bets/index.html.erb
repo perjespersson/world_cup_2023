@@ -1,4 +1,4 @@
-<div class="row bg-white border-radius mt-4">
+<div class="row bg-white border-radius mt-4 mb-4">
   <div class="col-lg-12">
     <h3 class="text-center p-3">Tabell</h3>
 
@@ -43,7 +43,11 @@
           </div>
 
           <div style="width: 60px;">
-            <p class="text-center my-auto"><%= game.home_team_score %> - <%= game.away_team_score %></p>
+            <% if game.home_team_score.nil? %>
+              <p class="text-center my-auto"><%= game.time.strftime("%H:%M") %></p>
+            <% else %>
+              <p class="text-center my-auto"><%= game.home_team_score %> - <%= game.away_team_score %></p>
+            <% end %>
           </div>
 
           <div style="width: 40px;">
@@ -73,7 +77,11 @@
           </div>
 
           <div style="width: 60px;">
-            <p class="text-center my-auto"><%= game.home_team_score %> - <%= game.away_team_score %></p>
+            <% if game.home_team_score.nil? %>
+              <p class="text-center my-auto"><%= game.time.strftime("%H:%M") %></p>
+            <% else %>
+              <p class="text-center my-auto"><%= game.home_team_score %> - <%= game.away_team_score %></p>
+            <% end %>
           </div>
 
           <div style="width: 40px;">
