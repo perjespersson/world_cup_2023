@@ -12,31 +12,32 @@ class BetsController < ApplicationController
               WITH user_games_with_result AS (
                 SELECT
                   users.name,
+                  home_team_score,
+                  away_team_score,
                   bets.bet,
-                    CASE
-                  WHEN home_team_score > away_team_score THEN '1'
-                  WHEN home_team_score = away_team_score THEN 'x'
-                  ELSE '2'
-                END AS result
+                  CASE
+                    WHEN home_team_score > away_team_score THEN '1'
+                    WHEN home_team_score = away_team_score THEN 'x'
+                    WHEN home_team_score < away_team_score THEN '2'
+                    ELSE NULL
+                  END AS result
                 FROM
                   users
                 JOIN
                   bets
                 ON
                   bets.user_id = users.id
-                  AND bets.bet IS NOT NULL
                 JOIN
                   games
                 ON
                   bets.game_id = games.id
-                  AND games.home_team_score IS NOT NULL
-                  AND games.away_team_score IS NOT NULL
               ), user_games_with_points AS (
                 SELECT
                   *,
                   CASE
                     WHEN bet = result THEN 1
-                    ELSE 0
+                    WHEN bet != result THEN 0
+                    ELSE NULL
                   END AS points
                 FROM
                   user_games_with_result
@@ -45,10 +46,10 @@ class BetsController < ApplicationController
               SELECT
                 RANK () OVER (ORDER BY SUM(points) DESC) AS rank,
                 name,
-                COUNT(*) AS total_bets,
+                COUNT(*) filter (WHERE bet IS NOT NULL AND home_team_score IS NOT NULL AND away_team_score IS NOT NULL) total_bets,
                 COUNT(*) filter (WHERE points = 1) AS wins,
                 COUNT(*) filter (WHERE points = 0) AS losses,
-                SUM(points) AS points
+                COALESCE(SUM(points), 0) AS points
               FROM
                 user_games_with_points
               GROUP BY

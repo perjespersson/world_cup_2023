@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   root 'bets#index'
 
   resources :bets, only: [:index]
-  resources :games, only: [:index, :show]
+  resources :games, only: [:index, :edit, :update]
 end
