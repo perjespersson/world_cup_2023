@@ -6,17 +6,17 @@
       <h5 class="border-bottom border-top p-3"><%= row["date"] %></h5>
 
       <% row["games"].each do |game| %>
-        <div class="d-flex justify-content-center align-items-center p-3">
+        <a href="#" class="d-flex justify-content-center align-items-center p-3">
           <div style="width: calc(50% - 70px);">
             <p class="text-end my-auto pe-3"><%= game[2] %></p>
           </div>
 
           <div style="width: 40px;">
-            <%= image_tag("flags/nederlanderna.png", size: "32x32", class: "mx-auto my-auto d-block") %>
+            <%= image_tag("flags/#{game[5]}", size: "32x32", class: "mx-auto my-auto d-block") %>
           </div>
 
           <div style="width: 60px;">
-            <% if game[0].nil? %>
+            <% if game[0].nil? && game[1].nil? %>
               <p class="text-center my-auto"><%= DateTime.parse(game[4]).strftime("%H:%M") %></p>
             <% else %>
               <p class="text-center my-auto"><%= game[0] %> - <%= game[1] %></p>
@@ -24,13 +24,13 @@
           </div>
 
           <div style="width: 40px;">
-            <%= image_tag("flags/norge.png", size: "32x32") %>
+            <%= image_tag("flags/#{game[6]}", size: "32x32", class: "mx-auto my-auto d-block") %>
           </div>
 
           <div style="width: calc(50% - 70px);">
             <p class="text-start my-auto ps-3"><%= game[3] %></p>
           </div>
-        </div>
+        </a>
       <% end %>
     <% end %>
   </div>
