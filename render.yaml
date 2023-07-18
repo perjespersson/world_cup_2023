@@ -1,0 +1,18 @@
+databases:
+  - name: world_cup_2023
+    databaseName: world_cup_2023
+    user: world_cup_2023
+
+services:
+  - type: web
+    name: world_cup_2023
+    runtime: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: world_cup_2023
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
