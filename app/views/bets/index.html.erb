@@ -1,73 +1,39 @@
-<div class="row bg-white border-radius m-0 mb-4">
-  <div class="col-lg-12">
-    <h3 class="text-center p-3">Tabell</h3>
+<div class="row bg-white border-radius m-0 mb-4 box-shadow">
+  <div class="col-lg-12 p-0">
+    <h4 class="text-center border-bottom p-3 m-0">Tabell</h4>
 
-    <table class="table">
+    <table class="table table-xxl">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Namn</th>
-          <th scope="col">Antal bet</th>
-          <th scope="col">Vinster</th>
-          <th scope="col">Förluster</th>
-          <th scope="col">Poäng</th>
+          <th scope="col" class="text-center p-4">#</th>
+          <th scope="col" class="pb-4 pt-4">Namn</th>
+          <th class="text-center p-4" scope="col">AB</th>
+          <th class="text-center p-4" scope="col">V</th>
+          <th class="text-center p-4" scope="col">F</th>
+          <th class="text-center p-4" scope="col">P</th>
         </tr>
       </thead>
 
       <% @table.each do |row| %>
         <tr>
-          <td><%= row["rank"] %></td>
-          <td><%= row["name"] %></td>
-          <td><%= row["total_bets"] %></td>
-          <td><%= row["wins"] %></td>
-          <td><%= row["losses"] %></td>
-          <td><%= row["points"] %></td>
+          <td class="text-center p-4"><%= row["rank"] %></td>
+          <td class="pt-4 pb-4"><%= row["name"] %></td>
+          <td class="text-center p-4"><%= row["total_bets"] %></td>
+          <td class="text-center p-4"><%= row["wins"] %></td>
+          <td class="text-center p-4"><%= row["losses"] %></td>
+          <td class="text-center p-4"><%= row["points"] %></td>
         </tr>
       <% end %>
     </table>
   </div>
 </div>
 
-<div class="row bg-white border-radius m-0 mb-4">
-  <div class="col-lg-12">
-    <h3 class="text-center p-3">Senaste omgång</h3>
+<div class="row bg-white border-radius m-0 mb-4 box-shadow">
+  <div class="col-lg-12 p-0">
+    <h4 class="text-center p-3 mb-0">Förgående omgång</h4>
 
     <% @latest_games.each do |game| %>
-        <div class="d-flex justify-content-center align-items-center p-3">
-          <div style="width: calc(50% - 70px);">
-            <p class="text-end my-auto pe-3"><%= game.home_team.name %></p>
-          </div>
-
-          <div style="width: 40px;">
-            <%= image_tag("flags/nederlanderna.png", size: "32x32", class: "mx-auto my-auto d-block") %>
-          </div>
-
-          <div style="width: 60px;">
-            <% if game.home_team_score.nil? %>
-              <p class="text-center my-auto"><%= game.time.strftime("%H:%M") %></p>
-            <% else %>
-              <p class="text-center my-auto"><%= game.home_team_score %> - <%= game.away_team_score %></p>
-            <% end %>
-          </div>
-
-          <div style="width: 40px;">
-            <%= image_tag("flags/norge.png", size: "32x32") %>
-          </div>
-
-          <div style="width: calc(50% - 70px);">
-            <p class="text-start my-auto ps-3"><%= game.away_team.name %></p>
-          </div>
-        </div>
-    <% end %>
-  </div>
-</div>
-
-<div class="row bg-white border-radius m-0 mb-4">
-  <div class="col-lg-12">
-    <h3 class="text-center p-3">Kommande omgång</h3>
-
-    <% @upcoming_games.each do |game| %>
-        <div class="d-flex justify-content-center align-items-center p-3">
+        <div class="d-flex justify-content-center align-items-center border-top p-4">
           <div style="width: calc(50% - 70px);">
             <p class="text-end my-auto pe-3"><%= game.home_team.name %></p>
           </div>
@@ -85,7 +51,41 @@
           </div>
 
           <div style="width: 40px;">
-            <%= image_tag("flags/norge.png", size: "32x32") %>
+            <%= image_tag("flags/#{game.away_team.img}", size: "32x32") %>
+          </div>
+
+          <div style="width: calc(50% - 70px);">
+            <p class="text-start my-auto ps-3"><%= game.away_team.name %></p>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row bg-white border-radius m-0 mb-4 box-shadow">
+  <div class="col-lg-12 p-0">
+    <h4 class="text-center p-3 mb-0">Kommande omgång</h4>
+
+    <% @upcoming_games.each do |game| %>
+        <div class="d-flex justify-content-center align-items-center border-top p-4">
+          <div style="width: calc(50% - 70px);">
+            <p class="text-end my-auto pe-3"><%= game.home_team.name %></p>
+          </div>
+
+          <div style="width: 40px;">
+            <%= image_tag("flags/#{game.home_team.img}", size: "32x32", class: "mx-auto my-auto d-block") %>
+          </div>
+
+          <div style="width: 60px;">
+            <% if game.home_team_score.nil? %>
+              <p class="text-center my-auto"><%= game.time.strftime("%H:%M") %></p>
+            <% else %>
+              <p class="text-center my-auto"><%= game.home_team_score %> - <%= game.away_team_score %></p>
+            <% end %>
+          </div>
+
+          <div style="width: 40px;">
+            <%= image_tag("flags/#{game.away_team.img}", size: "32x32") %>
           </div>
 
           <div style="width: calc(50% - 70px);">

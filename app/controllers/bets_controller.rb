@@ -44,7 +44,7 @@ class BetsController < ApplicationController
               )
 
               SELECT
-                RANK () OVER (ORDER BY SUM(points) DESC) AS rank,
+                RANK () OVER (ORDER BY COALESCE(SUM(points), 0) DESC) AS rank,
                 name,
                 COUNT(*) filter (WHERE bet IS NOT NULL AND home_team_score IS NOT NULL AND away_team_score IS NOT NULL) total_bets,
                 COUNT(*) filter (WHERE points = 1) AS wins,
