@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: world_cup_2023_production
-  username: world_cup_2023
-  password: <%= ENV["WORLD_CUP_2023_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
