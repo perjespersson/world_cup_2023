@@ -1,8 +1,8 @@
-<div class="row bg-white border-radius m-0 mb-4 box-shadow">
+<div class="row bg-white border-radius m-0 mb-4 box-shadow border">
   <div class="col-lg-12 p-0">
     <h4 class="text-center border-bottom p-3 m-0">Tabell</h4>
 
-    <table class="table table-xxl">
+    <table class="table table-borderless m-0">
       <thead>
         <tr>
           <th scope="col" class="text-center p-4">#</th>
@@ -15,7 +15,7 @@
       </thead>
 
       <% @table.each do |row| %>
-        <tr>
+        <tr class="border-top">
           <td class="text-center p-4"><%= row["rank"] %></td>
           <td class="pt-4 pb-4"><%= row["name"] %></td>
           <td class="text-center p-4"><%= row["total_bets"] %></td>
@@ -28,8 +28,8 @@
   </div>
 </div>
 
-<div class="row bg-white border-radius m-0 mb-4 box-shadow">
-  <div class="col-lg-12 p-0">
+<div class="row bg-white border-radius m-0 mb-4 box-shadow border">
+  <div class="col-lg-12">
     <h4 class="text-center p-3 mb-0">Förgående omgång</h4>
 
     <% @latest_games.each do |game| %>
@@ -62,7 +62,7 @@
   </div>
 </div>
 
-<div class="row bg-white border-radius m-0 mb-4 box-shadow">
+<div class="row bg-white border-radius m-0 mb-4 box-shadow border">
   <div class="col-lg-12 p-0">
     <h4 class="text-center p-3 mb-0">Kommande omgång</h4>
 

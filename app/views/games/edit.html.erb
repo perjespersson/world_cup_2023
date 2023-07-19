@@ -1,8 +1,8 @@
 <%= form_for @game do |f| %>
-  <div class="row bg-white border-radius m-0 mb-4 box-shadow">
-    <div class="col-lg-12">
-      <h3 class="text-center p-3 border-bottom">Gruppmatch</h3>
-        <div class="d-flex justify-content-center align-items-center p-3 border-bottom">
+  <div class="row bg-white border-radius m-0 mb-4 box-shadow border">
+    <div class="col-lg-12 p-0">
+      <h4 class="text-center p-3 border-bottom"><%= I18n.t(@game.game_type) %></h4>
+        <div class="d-flex justify-content-center align-items-center p-4 border-bottom">
 
           <div style="width: calc(50% - 120px);">
             <p class="text-end my-auto pe-3 h4"><%= @game.home_team.name %></p>
@@ -26,13 +26,15 @@
           </div>
         </div>
 
-      <p class="text-center">Grupp A - 27 Juni, 15:00</p>
+      <p class="text-center m-0 p-3 text-secondary">Grupp <%= @game.home_team.group %> - <%= @game.date.strftime("%d %B %Y") %> - <%= @game.time.strftime("%H:%M") %></p>
     </div>
   </div>
 
   <div class="row m-0 mt-4">
     <div class="col-lg-12 p-0">
-      <%= f.submit "Spara", class: "btn btn-primary" %>
+      <div class="d-flex justify-content-md-end">
+        <%= f.submit "Spara", class: "btn btn-primary border-radius btn-lg" %>
+      </div>
     </div>
   </div>
 <% end %>
