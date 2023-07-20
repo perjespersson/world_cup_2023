@@ -3,12 +3,12 @@
     <h4 class="text-center p-4 mb-0">Matcher</h4>
 
     <% @games_by_date.each do |row| %>
-      <h6 class="border-radius text-center p-3 mb-0" style="background: #f4f4f4;"><b><%= row["date"].strftime("%d %B %Y") %></b></h6>
+      <h6 class="border-radius text-center fs-7 p-3 mb-0" style="background: #f4f4f4;"><b><%= row["date"].strftime("%d %B %Y") %></b></h6>
 
       <% row["games"].each do |game| %>
         <%= link_to edit_game_path(game[7]), class: 'd-flex justify-content-center align-items-center text-decoration-none p-4 link-dark border-radius custom-background table-border-bottom' do %>
           <div style="width: calc(50% - 70px);">
-            <p class="text-end my-auto pe-3"><%= game[2] %></p>
+            <p class="text-end fs-7 my-auto pe-3"><%= game[2] %></p>
           </div>
 
           <div style="width: 40px;">
@@ -17,9 +17,9 @@
 
           <div style="width: 60px;">
             <% if game[0].nil? && game[1].nil? %>
-              <p class="text-center my-auto"><%= DateTime.parse(game[4]).strftime("%H:%M") %></p>
+              <p class="text-center fs-7 my-auto"><%= DateTime.parse(game[4]).strftime("%H:%M") %></p>
             <% else %>
-              <p class="text-center my-auto"><%= game[0] %> - <%= game[1] %></p>
+              <p class="text-center fs-7 my-auto"><%= game[0] %> - <%= game[1] %></p>
             <% end %>
           </div>
 
@@ -28,7 +28,7 @@
           </div>
 
           <div style="width: calc(50% - 70px);">
-            <p class="text-start my-auto ps-3"><%= game[3] %></p>
+            <p class="text-start fs-7 my-auto ps-3"><%= game[3] %></p>
           </div>
         <% end %>
       <% end %>
