@@ -9,6 +9,6 @@ class Game < ApplicationRecord
     Team.find(self.away_team_id)
   end
 
-  validates :home_team_score, presence: true
-  validates :away_team_score, presence: true
+  validates :home_team_score, presence: true, on: :update
+  validates :away_team_score, presence: true, on: :update
 end
