@@ -52,15 +52,12 @@ task :upload_group_games => :environment do
 
   games_data.each do |game_data|
     home_team = Team.find_by(name: game_data[:home_team])
-    home_team_id = home_team ? home_team.id : nil
-
     away_team = Team.find_by(name: game_data[:away_team])
-    away_team_id = away_team ? away_team.id : nil
 
-    Game.create!(
+    Game.create(
       time: game_data[:time],
-      home_team_id: home_team_id,
-      away_team_id: away_team_id,
+      home_team_id: home_team.id,
+      away_team_id: away_team.id,
       date: game_data[:date],
       game_type: game_data[:game_type]
     )
