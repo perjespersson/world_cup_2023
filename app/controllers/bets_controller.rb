@@ -59,13 +59,24 @@ class BetsController < ApplicationController
     ActiveRecord::Base.connection.execute(query)
   end
 
+  def current_date
+    @current_date ||= Game.where.not(home_team_score: nil, away_team_score: nil).order(date: :desc).limit(1).pluck(:date)
+  end
+
+  def next_date
+    @next_date ||= Game.distinct(:date)
+                       .where("date > ?", current_date)
+                       .order(date: :asc)
+                       .limit(1)
+                       .pluck(:date)
+
+  end
+
   def latest_games
-    latest_date = Game.where.not(home_team_score: nil, away_team_score: nil).order(date: :desc).limit(1).pluck(:date)
-    Game.where(date: latest_date).order(time: :asc)
+    Game.where(date: current_date).order(time: :asc)
   end
 
   def upcoming_games
-    latest_date = Game.where(home_team_score: nil, away_team_score: nil).order(date: :asc).limit(1).pluck(:date)
-    Game.where(date: latest_date).order(time: :asc)
+    Game.where(date: next_date).order(time: :asc)
   end
 end
