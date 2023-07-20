@@ -8,13 +8,12 @@ class GamesController < ApplicationController
   end
 
   def update
-    game = Game.find(params[:id])
+    @game = Game.find(params[:id])
 
-    if game.update(home_team_score: params[:game][:home_team_score], away_team_score: params[:game][:away_team_score])
+    if @game.update(home_team_score: params[:game][:home_team_score], away_team_score: params[:game][:away_team_score])
       redirect_to edit_game_path(params[:id]), notice: "Resultat uppdaterat!"
     else
-      flash[:alert] = "Någonting gick fel, testa igen!"
-      render :edit
+      redirect_to edit_game_path(params[:id]), alert: "Någonting gick fel, testa igen!"
     end
   end
 
