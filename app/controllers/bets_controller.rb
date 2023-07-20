@@ -65,7 +65,7 @@ class BetsController < ApplicationController
   end
 
   def upcoming_games
-    latest_date = Game.where(home_team_score: nil, away_team_score: nil).order(date: :desc).limit(1).pluck(:date)
+    latest_date = Game.where(home_team_score: nil, away_team_score: nil).order(date: :asc).limit(1).pluck(:date)
     Game.where(date: latest_date).order(time: :asc)
   end
 end

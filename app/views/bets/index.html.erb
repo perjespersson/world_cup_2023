@@ -1,16 +1,16 @@
 <div class="row bg-white border-radius m-0 mb-4 box-shadow border">
   <div class="col-lg-12 p-0">
-    <h4 class="text-center border-bottom p-3 m-0">Tabell</h4>
+    <h4 class="text-center border-bottom p-4 m-0">Tabell</h4>
 
     <table class="table table-borderless m-0">
       <thead>
         <tr>
-          <th scope="col" class="text-center p-4">#</th>
-          <th scope="col" class="pb-4 pt-4">Namn</th>
-          <th class="text-center p-4" scope="col">AB</th>
-          <th class="text-center p-4" scope="col">V</th>
-          <th class="text-center p-4" scope="col">F</th>
-          <th class="text-center p-4" scope="col">P</th>
+          <th scope="col" class="text-center p-2 text-secondary">#</th>
+          <th scope="col" class="p-2 text-secondary">Namn</th>
+          <th class="text-center p-2 text-secondary" scope="col">AB</th>
+          <th class="text-center p-2 text-secondary" scope="col">V</th>
+          <th class="text-center p-2 text-secondary" scope="col">F</th>
+          <th class="text-center p-2 text-secondary" scope="col">P</th>
         </tr>
       </thead>
 
@@ -29,11 +29,11 @@
 </div>
 
 <div class="row bg-white border-radius m-0 mb-4 box-shadow border">
-  <div class="col-lg-12">
-    <h4 class="text-center p-3 mb-0">Förgående omgång</h4>
+  <div class="col-lg-12 p-0">
+    <h4 class="text-center table-border-bottom p-4 mb-0">Förgående omgång</h4>
 
     <% @latest_games.each do |game| %>
-        <div class="d-flex justify-content-center align-items-center border-top p-4">
+        <%= link_to edit_game_path(game.id), class: 'd-flex justify-content-center align-items-center text-decoration-none p-4 link-dark custom-background-2 table-border-bottom' do %>
           <div style="width: calc(50% - 70px);">
             <p class="text-end my-auto pe-3"><%= game.home_team.name %></p>
           </div>
@@ -57,14 +57,14 @@
           <div style="width: calc(50% - 70px);">
             <p class="text-start my-auto ps-3"><%= game.away_team.name %></p>
           </div>
-        </div>
+        <% end %>
     <% end %>
   </div>
 </div>
 
 <div class="row bg-white border-radius m-0 mb-4 box-shadow border">
   <div class="col-lg-12 p-0">
-    <h4 class="text-center p-3 mb-0">Kommande omgång</h4>
+    <h4 class="text-center p-4 mb-0">Kommande omgång</h4>
 
     <% @upcoming_games.each do |game| %>
         <div class="d-flex justify-content-center align-items-center border-top p-4">

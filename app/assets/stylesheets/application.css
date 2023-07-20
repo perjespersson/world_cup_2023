@@ -56,8 +56,22 @@ input[type=number] {
   background: #ebebeb;
 }
 
+.custom-background-2 {
+  background: transparent;
+}
+
+.custom-background-2:hover{
+  background: #ebebeb;
+}
+
+.custom-background-2:hover:last-child {
+  background: #ebebeb;
+  border-bottom: 15px;
+}
+
+
 .table-border-bottom {
-  border-bottom: 1px solid #f8f8f8 !important;
+  border-bottom: 1px solid #f1f0f0 !important;
 }
 
 .table>:not(caption)>*>* {
