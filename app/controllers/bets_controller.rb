@@ -58,7 +58,7 @@ class BetsController < ApplicationController
 
                 SELECT
                   *,
-                  ((wins::float / total_bets::float) * 100)::integer AS hit_rate
+                  COALESCE(((wins::float / NULLIF(total_bets::float, 0)) * 100)::integer, 0) AS hit_rate /* If it is 0 -> NULL which results in the whole becoming NULL. Therefore coalesce to set it to 0 */
                 FROM
                   user_games_with_statistics
             SQL
