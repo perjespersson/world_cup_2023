@@ -7,12 +7,9 @@
 
       <% row["games"].each do |game| %>
         <%= link_to edit_game_path(game[7]), class: 'd-flex justify-content-center align-items-center text-decoration-none p-4 link-dark border-radius custom-background table-border-bottom' do %>
-          <div style="width: calc(50% - 70px);">
+          <div class="d-flex flex-row-reverse" style="width: calc(50% - 30px);">
+            <%= image_tag("flags/#{game[5]}", size: "32x32") %>
             <p class="text-end fs-7 my-auto pe-3"><%= game[2] %></p>
-          </div>
-
-          <div style="width: 40px;">
-            <%= image_tag("flags/#{game[5]}", size: "32x32", class: "mx-auto my-auto d-block") %>
           </div>
 
           <div style="width: 60px;">
@@ -23,11 +20,8 @@
             <% end %>
           </div>
 
-          <div style="width: 40px;">
-            <%= image_tag("flags/#{game[6]}", size: "32x32", class: "mx-auto my-auto d-block") %>
-          </div>
-
-          <div style="width: calc(50% - 70px);">
+          <div class="d-flex flex-row" style="width: calc(50% - 30px);">
+            <%= image_tag("flags/#{game[6]}", size: "32x32") %>
             <p class="text-start fs-7 my-auto ps-3"><%= game[3] %></p>
           </div>
         <% end %>
