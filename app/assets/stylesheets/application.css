@@ -81,3 +81,26 @@ input[type=number] {
 .fs-7 {
   font-size: 0.9rem!important;
 }
+
+@media (max-width: 992px) {
+  .fs-7 {
+    font-size: 0.8rem!important;
+  }
+}
+
+/* Apply hyphenation to the container with class "hyphens" */
+.hyphens {
+  overflow-wrap: break-word; /* Allow word-break within words */
+  hyphens: auto; /* Enable automatic hyphenation */
+}
+
+/* Add hyphen after line-breaks in the div with class "hyphens" */
+.hyphens::after {
+  content: "-";
+  visibility: hidden; /* Hide the hyphen */
+}
+
+/* Display the hyphen when a line is broken in the div with class "hyphens" */
+.hyphens:last-child::after {
+  visibility: visible;
+}
