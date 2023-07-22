@@ -7,22 +7,26 @@
 
       <% row["games"].each do |game| %>
         <%= link_to edit_game_path(game[7]), class: 'd-flex justify-content-center align-items-center text-decoration-none p-4 link-dark border-radius custom-background table-border-bottom' do %>
-          <div class="d-flex flex-row-reverse" style="width: calc(50% - 30px);">
-            <%= image_tag("flags/#{game[5]}", size: "32x32") %>
-            <p class="text-end fs-7 my-auto pe-3"><%= game[2] %></p>
+          <div class="d-flex justify-content-end team-width">
+            <div class="d-flex left-team">
+              <%= image_tag("flags/#{game[5]}") %>
+              <p class="fs-7 my-auto"><%= game[2] %></p>
+            </div>
           </div>
 
-          <div style="width: 60px;">
+          <div class="game_date_time">
             <% if game[0].nil? && game[1].nil? %>
-              <p class="text-center fs-7 my-auto"><%= DateTime.parse(game[4]).strftime("%H:%M") %></p>
+              <p class="text-center my-auto"><%= DateTime.parse(game[4]).strftime("%H:%M") %></p>
             <% else %>
-              <p class="text-center fs-7 my-auto"><%= game[0] %> - <%= game[1] %></p>
+              <p class="text-center my-auto"><%= game[0] %> - <%= game[1] %></p>
             <% end %>
           </div>
 
-          <div class="d-flex flex-row" style="width: calc(50% - 30px);">
-            <%= image_tag("flags/#{game[6]}", size: "32x32") %>
-            <p class="text-start fs-7 my-auto ps-3"><%= game[3] %></p>
+          <div class="d-flex justify-content-start team-width">
+            <div class="d-flex right-team">
+              <%= image_tag("flags/#{game[6]}") %>
+              <p class="fs-7 my-auto"><%= game[3] %></p>
+            </div>
           </div>
         <% end %>
       <% end %>

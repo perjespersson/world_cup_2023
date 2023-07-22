@@ -82,25 +82,66 @@ input[type=number] {
   font-size: 0.9rem!important;
 }
 
+.team-width {
+  width: calc(50% - 30px);
+}
+
+.left-team {
+  flex-direction: row-reverse!important;
+}
+
+.left-team img {
+  display: block;
+  width: 32px;
+  margin-left: 1rem;
+}
+
+.right-team {
+  flex-direction: row!important;
+}
+
+.right-team img {
+  display: block;
+  width: 32px;
+  margin-right: 1rem;
+}
+
+.game_date_time {
+  width: 60px;
+}
+
+.game_date_time p {
+  font-size: 0.9rem!important;
+}
+
 @media (max-width: 992px) {
   .fs-7 {
     font-size: 0.8rem!important;
   }
 }
 
-/* Apply hyphenation to the container with class "hyphens" */
-.hyphens {
-  overflow-wrap: break-word; /* Allow word-break within words */
-  hyphens: auto; /* Enable automatic hyphenation */
-}
+@media (max-width: 560px) {
+  .left-team {
+    flex-direction: column!important;
+    width: 120px;
+  }
 
-/* Add hyphen after line-breaks in the div with class "hyphens" */
-.hyphens::after {
-  content: "-";
-  visibility: hidden; /* Hide the hyphen */
-}
+  .right-team {
+    flex-direction: column!important;
+    width: 120px;
+  }
 
-/* Display the hyphen when a line is broken in the div with class "hyphens" */
-.hyphens:last-child::after {
-  visibility: visible;
+  .left-team img, .right-team img {
+    margin: 0 auto;
+    width: 40px;
+    margin-bottom: 12px;
+  }
+
+  .team-width p {
+    text-align: center;
+  }
+
+  .game_date_time p{
+    font-size: 1rem!important;
+  }
 }
