@@ -54,6 +54,7 @@ input[type=number] {
 
 .custom-background:hover {
   background: #ebebeb;
+  border-radius: 15px;
 }
 
 .custom-background-2 {
