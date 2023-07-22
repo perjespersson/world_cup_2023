@@ -86,62 +86,94 @@ input[type=number] {
   width: calc(50% - 30px);
 }
 
-.team-xl-width {
-  width: calc(50% - 70px);
-}
-
-.left-team-sm, .left-team-xl {
+.left-team-sm {
   flex-direction: row-reverse!important;
 }
 
 .left-team-sm img {
   display: block;
   width: 32px;
+  height: 32px;
   margin-left: 1rem;
 }
 
 .left-team-xl img {
   display: block;
   width: 42px;
-  margin-left: 1rem;
+  height: 42px;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
-.right-team-sm, .right-team-xl {
+.right-team-sm {
   flex-direction: row!important;
 }
 
 .right-team-sm img {
   display: block;
   width: 32px;
+  height: 32px;
   margin-right: 1rem;
 }
 
 .right-team-xl img {
   display: block;
   width: 42px;
-  margin-right: 1rem;
+  height: 42px;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 .game-sm-date-time-width {
   width: 60px;
 }
 
-.game-xl-date-time-width {
-  width: 140px;
-}
-
 .game-sm-date-time-width p {
   font-size: 0.9rem!important;
 }
 
-.team-score {
+.team-score-left {
   width: 50px;
   height: 50px;
+  margin-right: 10px;
+}
+
+.team-score-right {
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+}
+
+.left-team-xl {
+  width: 50%;
+  flex-direction: row-reverse;
+}
+
+.right-team-xl {
+  width: 50%;
+  flex-direction: row;
 }
 
 @media (max-width: 992px) {
   .fs-7 {
     font-size: 0.8rem!important;
+  }
+
+  .left-team-xl {
+    width: 100%;
+    flex-direction: row;
+    padding-bottom: 20px;
+  }
+
+  .right-team-xl {
+    flex-direction: row !important;
+    width: 100%;
+    padding-top: 20px;
+    border-top: 1px solid #f1f0f0;
+  }
+
+  .team-score-left, .team-score-right {
+    margin: 0;
   }
 }
 
@@ -151,42 +183,19 @@ input[type=number] {
     width: 120px;
   }
 
-  .left-team-xl {
-    flex-direction: column!important;
-    width: 120px;
-  }
-
   .right-team-sm {
     flex-direction: column!important;
     width: 120px;
   }
 
-  .right-team-xl {
-    flex-direction: column!important;
-    width: 120px;
-  }
-
-  .left-team-xl p, .right-team-xl p {
-    font-size: 0.85rem !important;
-  }
-
   .left-team-sm img, .right-team-sm img {
     margin: 0 auto;
     width: 40px;
+    height: 40px;
     margin-bottom: 12px;
   }
 
-  .left-team-xl img, .right-team-xl img {
-    margin: 0 auto;
-    width: 50px;
-    margin-bottom: 12px;
-  }
-
-  .team-sm-width p, .team-xl-width p  {
-    text-align: center;
-  }
-
-  .team-xl-width p {
+  .left-team-sm p, .right-team-sm p {
     text-align: center;
   }
 
