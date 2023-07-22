@@ -7,14 +7,14 @@
 
       <% row["games"].each do |game| %>
         <%= link_to edit_game_path(game[7]), class: 'd-flex justify-content-center align-items-center text-decoration-none p-4 link-dark border-radius custom-background table-border-bottom' do %>
-          <div class="d-flex justify-content-end team-width">
-            <div class="d-flex left-team">
+          <div class="d-flex justify-content-end team-sm-width">
+            <div class="d-flex left-team-sm">
               <%= image_tag("flags/#{game[5]}") %>
               <p class="fs-7 my-auto"><%= game[2] %></p>
             </div>
           </div>
 
-          <div class="game_date_time">
+          <div class="game-sm-date-time-width">
             <% if game[0].nil? && game[1].nil? %>
               <p class="text-center my-auto"><%= DateTime.parse(game[4]).strftime("%H:%M") %></p>
             <% else %>
@@ -22,8 +22,8 @@
             <% end %>
           </div>
 
-          <div class="d-flex justify-content-start team-width">
-            <div class="d-flex right-team">
+          <div class="d-flex justify-content-start team-sm-width">
+            <div class="d-flex right-team-sm">
               <%= image_tag("flags/#{game[6]}") %>
               <p class="fs-7 my-auto"><%= game[3] %></p>
             </div>

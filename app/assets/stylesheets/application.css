@@ -82,35 +82,35 @@ input[type=number] {
   font-size: 0.9rem!important;
 }
 
-.team-width {
+.team-sm-width {
   width: calc(50% - 30px);
 }
 
-.left-team {
+.left-team-sm {
   flex-direction: row-reverse!important;
 }
 
-.left-team img {
+.left-team-sm img {
   display: block;
   width: 32px;
   margin-left: 1rem;
 }
 
-.right-team {
+.right-team-sm {
   flex-direction: row!important;
 }
 
-.right-team img {
+.right-team-sm img {
   display: block;
   width: 32px;
   margin-right: 1rem;
 }
 
-.game_date_time {
+.game-sm-date-time-width {
   width: 60px;
 }
 
-.game_date_time p {
+.game-sm-date-time-width p {
   font-size: 0.9rem!important;
 }
 
@@ -121,27 +121,27 @@ input[type=number] {
 }
 
 @media (max-width: 560px) {
-  .left-team {
+  .left-team-sm {
     flex-direction: column!important;
     width: 120px;
   }
 
-  .right-team {
+  .right-team-sm {
     flex-direction: column!important;
     width: 120px;
   }
 
-  .left-team img, .right-team img {
+  .left-team-sm img, .right-team-sm img {
     margin: 0 auto;
     width: 40px;
     margin-bottom: 12px;
   }
 
-  .team-width p {
+  .team-sm-width p {
     text-align: center;
   }
 
-  .game_date_time p{
+  .game-sm-date-time-width p{
     font-size: 1rem!important;
   }
 }
