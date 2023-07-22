@@ -86,7 +86,11 @@ input[type=number] {
   width: calc(50% - 30px);
 }
 
-.left-team-sm {
+.team-xl-width {
+  width: calc(50% - 70px);
+}
+
+.left-team-sm, .left-team-xl {
   flex-direction: row-reverse!important;
 }
 
@@ -96,7 +100,13 @@ input[type=number] {
   margin-left: 1rem;
 }
 
-.right-team-sm {
+.left-team-xl img {
+  display: block;
+  width: 42px;
+  margin-left: 1rem;
+}
+
+.right-team-sm, .right-team-xl {
   flex-direction: row!important;
 }
 
@@ -106,12 +116,27 @@ input[type=number] {
   margin-right: 1rem;
 }
 
+.right-team-xl img {
+  display: block;
+  width: 42px;
+  margin-right: 1rem;
+}
+
 .game-sm-date-time-width {
   width: 60px;
 }
 
+.game-xl-date-time-width {
+  width: 140px;
+}
+
 .game-sm-date-time-width p {
   font-size: 0.9rem!important;
+}
+
+.team-score {
+  width: 50px;
+  height: 50px;
 }
 
 @media (max-width: 992px) {
@@ -126,9 +151,23 @@ input[type=number] {
     width: 120px;
   }
 
+  .left-team-xl {
+    flex-direction: column!important;
+    width: 120px;
+  }
+
   .right-team-sm {
     flex-direction: column!important;
     width: 120px;
+  }
+
+  .right-team-xl {
+    flex-direction: column!important;
+    width: 120px;
+  }
+
+  .left-team-xl p, .right-team-xl p {
+    font-size: 0.85rem !important;
   }
 
   .left-team-sm img, .right-team-sm img {
@@ -137,7 +176,17 @@ input[type=number] {
     margin-bottom: 12px;
   }
 
-  .team-sm-width p {
+  .left-team-xl img, .right-team-xl img {
+    margin: 0 auto;
+    width: 50px;
+    margin-bottom: 12px;
+  }
+
+  .team-sm-width p, .team-xl-width p  {
+    text-align: center;
+  }
+
+  .team-xl-width p {
     text-align: center;
   }
 
