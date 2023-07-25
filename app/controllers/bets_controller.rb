@@ -6,6 +6,14 @@ class BetsController < ApplicationController
     @upcoming_games = upcoming_games
   end
 
+  def user_bets
+    @user_bets = Bet.where(user_id: params[:id])
+
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
   private
 
   def table_query

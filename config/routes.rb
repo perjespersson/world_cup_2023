@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   root 'bets#index'
 
   resources :bets, only: [:index]
+  get '/bets/user_bets/:id', to: 'bets#user_bets', as: 'user_bets'
   resources :games, only: [:index, :edit, :update]
 end

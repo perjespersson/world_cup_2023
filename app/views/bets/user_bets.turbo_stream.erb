@@ -1,0 +1,7 @@
+<turbo-stream action="append" target="user_bets">
+  <template>
+      <% @user_bets.each do |bet| %>
+        <%= bet.bet %>
+      <% end %>
+  </template>
+</turbo-stream>
