@@ -1,18 +1,18 @@
 <turbo-stream action="append" target="user_bets">
   <template>
     <div class="modal-header">
-      <h1 class="modal-title fs-5" id="modal"><%= @user_bets.first.user.name %> - Bets</h1>
+      <h1 class="modal-title fs-5" id="modal"><%= @user_bets[0]["name"] %> - Bets</h1>
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
 
     <div class="modal-body" >
-      <table class="table table-bordered">
+      <table class="table">
         <tbody>
         <% @user_bets.each do |bet| %>
           <tr>
-            <td class="text-center" style="width: 33%; background-color: <%= bet.bet == "1" ? '#ebebeb' : 'transparent' %>"><%= bet.game.home_team.name %> </td>
-            <td class="text-center" style="width: 33%; background-color: <%= bet.bet == "x" ? '#ebebeb' : 'transparent' %>">X</td>
-            <td class="text-center" style="width: 33%; background-color: <%= bet.bet == "2" ? '#ebebeb' : 'transparent' %>"><%= bet.game.away_team.name %> </td>
+            <td class="text-center border-radius p-2" style="width: 33%; background-color: <%= bet_color(bet, "1") %>"><%= bet["home_team"] %></td>
+            <td class="text-center border-radius p-2" style="width: 33%; background-color: <%= bet_color(bet, "x") %>">X</td>
+            <td class="text-center border-radius p-2" style="width: 33%; background-color: <%= bet_color(bet, "2") %>"><%= bet["away_team"] %> </td>
           </tr>
         <% end %>
         </tbody>

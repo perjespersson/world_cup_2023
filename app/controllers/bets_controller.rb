@@ -7,7 +7,7 @@ class BetsController < ApplicationController
   end
 
   def user_bets
-    @user_bets = Bet.joins(:game).joins(:user).where(user_id: params[:id])
+    @user_bets = user_bets_query(params[:id])
 
     respond_to do |format|
       format.turbo_stream
@@ -15,6 +15,52 @@ class BetsController < ApplicationController
   end
 
   private
+
+  def user_bets_query(user_id)
+    query = <<-SQL
+              WITH user_games_with_bets AS (
+                SELECT
+                  users.name,
+                  bets.bet,
+                  home_team.name as home_team,
+                  away_team.name as away_team,
+                  home_team_score,
+                  away_team_score
+                FROM
+                  users
+                JOIN
+                  bets
+                ON
+                  bets.user_id = users.id
+                JOIN
+                  games
+                ON
+                  games.id = bets.game_id
+                JOIN
+                  teams home_team
+                ON
+                  home_team.id = games.home_team_id
+                JOIN
+                  teams away_team
+                ON
+                  away_team.id = games.away_team_id
+                WHERE
+                  users.id = #{user_id}
+              )
+
+              SELECT
+                *,
+                CASE
+                  WHEN home_team_score > away_team_score THEN '1'
+                  WHEN home_team_score = away_team_score THEN 'x'
+                  WHEN home_team_score < away_team_score THEN '2'
+                END AS result
+              FROM
+                user_games_with_bets
+            SQL
+
+    ActiveRecord::Base.connection.execute(query)
+  end
 
   def table_query
     query = <<-SQL
