@@ -1,12 +1,12 @@
 <div class="row bg-white border-radius m-0 mb-4 box-shadow border">
-  <div class="col-lg-12">
+  <div class="col-lg-12 p-0">
     <h4 class="text-center p-4 mb-0">Matcher</h4>
 
     <% @games_by_date.each do |row| %>
-      <h6 class="border-radius text-center fs-7 p-3 mb-0" style="background: #f4f4f4;"><b><%= row["date"].strftime("%d %B %Y") %></b></h6>
+      <h6 class="border-radius text-center fs-7 p-3 mb-0 ms-4 me-4" style="background: #f4f4f4;"><b><%= row["date"].strftime("%d %B %Y") %></b></h6>
 
       <% row["games"].each do |game| %>
-        <%= link_to edit_game_path(game[7]), class: 'd-flex justify-content-center align-items-center text-decoration-none p-4 link-dark custom-background table-border-bottom' do %>
+        <%= link_to edit_game_path(game[7]), class: 'd-flex justify-content-center align-items-center text-decoration-none p-4 ms-4 me-4 link-dark custom-background table-border-bottom' do %>
           <div class="d-flex justify-content-end team-sm-width">
             <div class="d-flex left-team-sm">
               <%= image_tag("flags/#{game[5]}") %>
