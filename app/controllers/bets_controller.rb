@@ -1,11 +1,6 @@
 class BetsController < ApplicationController
   def index
     @user_bets = user_bets_query(params[:user_id], params[:filter])
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   private

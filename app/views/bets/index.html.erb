@@ -3,8 +3,9 @@
     <div class="d-flex justify-content-between align-items-center border-bottom">
       <h4 class="m-4">Bets - <%= @user_bets.first["name"] %></h4>
 
-      <%= form_tag user_bets_path, method: :get, remote: true do %>
-        <%= select_tag :filter, options_for_select([['Alla bets', 'all'], ['Förgående bets', 'past'], ['Kommande bets', 'future']], params[:filter]), class: 'form-select form-select-sm border-radius m-4 ps-3', style: 'max-width:200px;', onchange: 'this.form.submit();' %>
+      <%= form_tag user_bets_path, method: :get, remote: true, class: "me-4" do %>
+        <%= select_tag :filter, options_for_select([['Alla bets', 'all'], ['Förgående bets', 'past'], ['Kommande bets', 'future']], params[:filter]),
+          class: 'form-select form-select-sm border-radius ps-3', style: 'max-width:200px;', onchange: 'this.form.submit();' %>
       <% end %>
     </div>
 

@@ -1,14 +1,14 @@
 <% user_bets.each do |bet| %>
-  <div class="row text-center border-bottom">
-    <div class="col-lg-4 p-3 border-radius" style="background-color: <%= bet_color(bet, "1") %>">
+  <div class="row text-center border-bottom m-0">
+    <div class="col-lg-4 pt-3 pb-3 border-radius" style="background-color: <%= bet_color(bet, "1") %>">
       <%= bet["home_team"] %>
     </div>
 
-    <div class="col-lg-4 p-3 border-radius" style="background-color: <%= bet_color(bet, "x") %>">
+    <div class="col-lg-4 pt-3 pb-3 border-radius" style="background-color: <%= bet_color(bet, "x") %>">
       X
     </div>
 
-    <div class="col-lg-4 p-3 border-radius" style="background-color: <%= bet_color(bet, "2") %>">
+    <div class="col-lg-4 pt-3 pb-3 border-radius" style="background-color: <%= bet_color(bet, "2") %>">
       <%= bet["away_team"] %>
     </div>
   </div>
