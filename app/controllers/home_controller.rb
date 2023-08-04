@@ -10,57 +10,62 @@ class HomeController < ApplicationController
 
   def table_query
     query = <<-SQL
-                WITH user_games_with_result AS (
-                  SELECT
-                    users.name,
-                    home_team_score,
-                    away_team_score,
-                    bets.bet,
-                    CASE
-                      WHEN home_team_score > away_team_score THEN '1'
-                      WHEN home_team_score = away_team_score THEN 'x'
-                      WHEN home_team_score < away_team_score THEN '2'
-                      ELSE NULL
-                    END AS result
-                  FROM
-                    users
-                  JOIN
-                    bets
-                  ON
-                    bets.user_id = users.id
-                  JOIN
-                    games
-                  ON
-                    bets.game_id = games.id
-                ), user_games_with_points AS (
+                  WITH user_games_with_result AS (
+                    SELECT
+                      users.name,
+                      users.id as user_id,
+                      home_team_score,
+                      away_team_score,
+                      home_team_id,
+                      away_team_id,
+                      bets.bet,
+                      CASE
+                        WHEN home_team_score > away_team_score THEN home_team_id
+                        WHEN home_team_score = away_team_score THEN NULL
+                        WHEN home_team_score < away_team_score THEN away_team_id
+                        ELSE NULL
+                      END AS result
+                    FROM
+                      users
+                    JOIN
+                      bets
+                    ON
+                      bets.user_id = users.id
+                      AND bets.bet_set IS TRUE
+                    JOIN
+                      games
+                    ON
+                      bets.game_id = games.id
+                  ),user_games_with_points AS (
+                    SELECT
+                      *,
+                      CASE
+                        WHEN bet::integer = result THEN 1
+                        ELSE 0
+                      END AS points
+                    FROM
+                      user_games_with_result
+                  ), user_games_with_statistics AS (
+                    SELECT
+                      RANK () OVER (ORDER BY COALESCE(SUM(points), 0) DESC) AS rank,
+                      name,
+                      user_id,
+                      COUNT(*) AS total_bets,
+                      COUNT(*) filter (WHERE points = 1) AS wins,
+                      COUNT(*) filter (WHERE points = 0) AS losses,
+                      COALESCE(SUM(points), 0) AS points
+                    FROM
+                      user_games_with_points
+                    GROUP BY
+                      name,
+                      user_id
+                  )
+
                   SELECT
                     *,
-                    CASE
-                      WHEN bet = result THEN 1
-                      WHEN bet != result THEN 0
-                      ELSE NULL
-                    END AS points
+                    COALESCE(((wins::float / NULLIF(total_bets::float, 0)) * 100)::integer, 0) AS hit_rate /* If it is 0 -> NULL which results in the whole becoming NULL. Therefore coalesce to set it to 0 */
                   FROM
-                    user_games_with_result
-                ), user_games_with_statistics AS (
-                  SELECT
-                    RANK () OVER (ORDER BY COALESCE(SUM(points), 0) DESC) AS rank,
-                    name,
-                    COUNT(*) filter (WHERE bet IS NOT NULL AND home_team_score IS NOT NULL AND away_team_score IS NOT NULL) total_bets,
-                    COUNT(*) filter (WHERE points = 1) AS wins,
-                    COUNT(*) filter (WHERE points = 0) AS losses,
-                    COALESCE(SUM(points), 0) AS points
-                  FROM
-                    user_games_with_points
-                  GROUP BY
-                    name
-                )
-
-                SELECT
-                  *,
-                  COALESCE(((wins::float / NULLIF(total_bets::float, 0)) * 100)::integer, 0) AS hit_rate /* If it is 0 -> NULL which results in the whole becoming NULL. Therefore coalesce to set it to 0 */
-                FROM
-                  user_games_with_statistics
+                    user_games_with_statistics
             SQL
 
     ActiveRecord::Base.connection.execute(query)

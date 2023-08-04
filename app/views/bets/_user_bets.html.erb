@@ -1,15 +1,26 @@
 <% user_bets.each do |bet| %>
-  <div class="d-flex text-center border-bottom m-0">
-    <div class="p-4" style="width: 33.3%;">
-      <p class="m-0 p-2 border-radius" style="background-color: <%= bet_color(bet, "1") %>"><%= bet["home_team"] %></p>
+  <div class="d-flex justify-content-between border-bottom">
+
+    <div class="d-flex justify-content-center text-center">
+      <div class="d-flex flex-column p-3 ps-4" style="opacity: <%= bet_opacity("1", bet["bet"]) %>">
+        <%= image_tag("flags/#{bet["home_team_img"]}", size: "42x42") %>
+        <p class="fs-7 my-auto mt-2"><b><%= bet["home_team"] %></b></p>
+      </div>
+
+      <div class="d-flex flex-column p-3" style="opacity: <%= bet_opacity("x", bet["bet"]) %>">
+        <%= image_tag("flags/draw.png", size: "42x42") %>
+        <p class="fs-7 my-auto mt-2"><b></b></p>
+      </div>
+
+      <div class="d-flex flex-column p-3" style="opacity: <%= bet_opacity("2", bet["bet"]) %>">
+        <%= image_tag("flags/#{bet["away_team_img"]}", size: "42x42") %>
+        <p class="fs-7 my-auto mt-2"><b><%= bet["away_team"] %></b></p>
+      </div>
     </div>
 
-    <div class="p-4" style="width: 33.3%;">
-      <p class="m-0 p-2 border-radius" style="background-color: <%= bet_color(bet, "x") %>">X</p>
-    </div>
-
-    <div class="p-4" style="width: 33.3%;">
-      <p class="m-0 p-2 border-radius" style="background-color: <%= bet_color(bet, "2") %>"><%= bet["away_team"] %></p>
+    <div class="d-flex flex-column p-3 pe-4" style="background-color: <%= bet_background(bet["bet"], bet["result"]) %>">
+      <%= image_tag("flags/#{bet["away_team_img"]}", size: "42x42") %>
+      <p class="fs-7 my-auto mt-2 text-center"><b><%= bet["away_team"] %></b></p>
     </div>
   </div>
 <% end %>

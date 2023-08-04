@@ -1,8 +1,12 @@
 module BetsHelper
-  def bet_color(bet, answer)
-    return 'transparent' unless bet["bet"] == answer # If it is not the chosen bet
-    return 'rgba(0, 152 , 95, 1.0)' if bet["bet"] == bet["result"] #If bet is correct
-    return 'rgba(221, 54, 54, 1.0)' if bet["bet"] != bet["result"] &&  bet["result"].present? #If bet is not correct
-    return '#ebebeb' # If it is chosen and game not played yet
+  def bet_opacity(bet, chosen_bet)
+    return 1 if bet == chosen_bet
+    0.15
+  end
+
+  def bet_background(bet, result)
+    return "transparent" unless result.present?
+    return "#E8FFF3" if bet == result
+    "#FFF5F8"
   end
 end
