@@ -1,140 +1,21 @@
 <div class="row bg-white border-radius m-0 mb-4 box-shadow border">
-  <div class="col-lg-12">
-    <h4 class="text-center p-4 m-0">Tabell</h4>
+  <div class="col-lg-12 p-0">
+    <div class="d-flex justify-content-between align-items-center border-bottom">
+      <h5 class="m-4">Bets - <%= @user_bets.first["name"] %></h5>
 
-    <div class="d-flex justify-content-between align-items-center border-radius mb-0" style="background: #f4f4f4;">
-      <div class="d-flex justify-content-start p-0 mb-0" style="width: 50%;">
-        <p class="text-center fs-7 p-3 mb-0" style="width: 55px">#</p>
-        <p class="fs-7 p-3 ps-0 mb-0"><b>Namn</b></p>
-      </div>
-
-      <div class="d-flex justify-content-end p-0 mb-0" style="width: 50%;">
-        <p class="text-center fs-7 pt-3 pb-3 mb-0" style="width: 65px" data-bs-toggle="tooltip" data-bs-placement="top" title="Antal bets"><b>AB</b></p>
-        <p class="text-center fs-7 pt-3 pb-3 mb-0" style="width: 65px" data-bs-toggle="tooltip" data-bs-placement="top" title="Vinster"><b>V</b></p>
-        <p class="text-center fs-7 pt-3 pb-3 mb-0" style="width: 65px" data-bs-toggle="tooltip" data-bs-placement="top" title="Förluster"><b>F</b></p>
-        <p class="text-center fs-7 pt-3 pb-3 mb-0" style="width: 65px" data-bs-toggle="tooltip" data-bs-placement="top" title="Hit rate"><b>HR</b></p>
-        <p class="text-center fs-7 pt-3 pb-3 mb-0" style="width: 65px" data-bs-toggle="tooltip" data-bs-placement="top" title="Poäng"><b>P</b></p>
-      </div>
+      <%= form_tag user_bets_path, method: :get, class: "me-4" do %>
+        <%= select_tag :filter, options_for_select([['Alla bets', 'all'], ['Förgående bets', 'past'], ['Kommande bets', 'future']], params[:filter]),
+          class: 'form-select form-select-sm border-radius ps-3', style: 'max-width:200px;', onchange: 'this.form.submit();' %>
+      <% end %>
     </div>
 
-    <% @table.each do |row| %>
-      <div class="d-flex justify-content-between align-items-center mb-0 table-border-bottom">
-        <div class="d-flex justify-content-start p-0 mb-0" style="width: 50%;">
-          <p class="text-center fs-7 p-3 mb-0" style="width: 55px"><%= row["rank"] %></p>
-          <p class="fs-7 p-3 ps-0 mb-0"><%= row["name"] %></p>
-        </div>
-
-        <div class="d-flex justify-content-end p-0 mb-0" style="width: 50%;">
-          <p class="text-center fs-7 pt-3 pb-3 mb-0" style="width: 65px"><%= row["total_bets"] %></p>
-          <p class="text-center fs-7 pt-3 pb-3 mb-0" style="width: 65px"><%= row["wins"] %></p>
-          <p class="text-center fs-7 pt-3 pb-3 mb-0" style="width: 65px"><%= row["losses"] %></p>
-          <p class="text-center fs-7 pt-3 pb-3 mb-0" style="width: 65px"><%= row["hit_rate"] %>%</p>
-          <p class="text-center fs-7 pt-3 pb-3 mb-0" style="width: 65px"><%= row["points"] %></p>
-        </div>
+    <div id="user-bets">
+      <div class="d-flex justify-content-between border-bottom">
+        <p class="m-2 ms-4"><b>Bet</b></p>
+        <p class="m-2 me-4"><b>Resultat</b></p>
       </div>
-    <% end %>
+
+      <%= render partial: "bets/user_bets", locals: {user_bets: @user_bets} %>
+    </div>
   </div>
 </div>
-
-<div class="row bg-white border-radius m-0 mb-4 box-shadow border">
-  <div class="col-lg-12 p-0">
-    <h4 class="text-center table-border-bottom p-4 mb-0">Nuvarande omgång</h4>
-
-    <% @current_games.each do |game| %>
-      <%= link_to edit_game_path(game.id), class: 'd-flex justify-content-center align-items-center text-decoration-none p-4 link-dark custom-background-2 table-border-bottom' do %>
-        <div class="d-flex justify-content-end team-sm-width">
-          <div class="d-flex left-team-sm">
-            <%= image_tag("flags/#{game.home_team.img}") %>
-            <p class="fs-7 my-auto"><%= game.home_team.name %></p>
-          </div>
-        </div>
-
-        <div class="game-sm-date-time-width">
-          <% if game.home_team_score.nil? %>
-            <p class="text-center fs-7 my-auto"><%= game.time.strftime("%H:%M") %></p>
-          <% else %>
-            <p class="text-center fs-7 my-auto"><%= game.home_team_score %> - <%= game.away_team_score %></p>
-          <% end %>
-        </div>
-
-        <div class="d-flex justify-content-start team-sm-width">
-          <div class="d-flex right-team-sm">
-            <%= image_tag("flags/#{game.away_team.img}") %>
-            <p class="fs-7 my-auto"><%= game.away_team.name %></p>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-
-<div class="row bg-white border-radius m-0 mb-4 box-shadow border">
-  <div class="col-lg-12 p-0">
-    <h4 class="text-center table-border-bottom p-4 mb-0">Förgående omgång</h4>
-
-    <% @previous_games.each do |game| %>
-      <%= link_to edit_game_path(game.id), class: 'd-flex justify-content-center align-items-center text-decoration-none p-4 link-dark custom-background-2 table-border-bottom' do %>
-          <div class="d-flex justify-content-end team-sm-width">
-            <div class="d-flex left-team-sm">
-              <%= image_tag("flags/#{game.home_team.img}") %>
-              <p class="fs-7 my-auto"><%= game.home_team.name %></p>
-            </div>
-          </div>
-
-        <div class="game-sm-date-time-width">
-          <% if game.home_team_score.nil? %>
-            <p class="text-center fs-7 my-auto"><%= game.time.strftime("%H:%M") %></p>
-          <% else %>
-            <p class="text-center fs-7 my-auto"><%= game.home_team_score %> - <%= game.away_team_score %></p>
-          <% end %>
-        </div>
-
-        <div class="d-flex justify-content-start team-sm-width">
-          <div class="d-flex right-team-sm">
-            <%= image_tag("flags/#{game.away_team.img}") %>
-            <p class="fs-7 my-auto"><%= game.away_team.name %></p>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-
-<div class="row bg-white border-radius m-0 mb-4 box-shadow border">
-  <div class="col-lg-12 p-0">
-    <h4 class="text-center table-border-bottom p-4 mb-0">Kommande omgång</h4>
-
-    <% @upcoming_games.each do |game| %>
-      <%= link_to edit_game_path(game.id), class: 'd-flex justify-content-center align-items-center text-decoration-none p-4 link-dark custom-background-2 table-border-bottom' do %>
-        <div class="d-flex justify-content-end team-sm-width">
-          <div class="d-flex left-team-sm">
-            <%= image_tag("flags/#{game.home_team.img}") %>
-            <p class="fs-7 my-auto"><%= game.home_team.name %></p>
-          </div>
-        </div>
-
-        <div class="game-sm-date-time-width">
-          <% if game.home_team_score.nil? %>
-            <p class="text-center fs-7 my-auto"><%= game.time.strftime("%H:%M") %></p>
-          <% else %>
-            <p class="text-center fs-7 my-auto"><%= game.home_team_score %> - <%= game.away_team_score %></p>
-          <% end %>
-        </div>
-
-        <div class="d-flex justify-content-start team-sm-width">
-          <div class="d-flex right-team-sm">
-            <%= image_tag("flags/#{game.away_team.img}") %>
-            <p class="fs-7 my-auto"><%= game.away_team.name %></p>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-
-<script>
-  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl)
-  })
-</script>
