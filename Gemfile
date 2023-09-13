@@ -73,3 +73,7 @@ end
 
 # Self added gems
 gem 'devise', '~> 4.9', '>= 4.9.2'
+gem 'devise-i18n'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection', '~> 1.0' # https://github.com/heartcombo/devise/issues/5236
