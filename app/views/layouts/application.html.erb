@@ -21,20 +21,33 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light box-shadow mb-4 border-bottom">
+    <nav class="navbar navbar-expand-lg navbar-light p-4 mb-4 border-bottom" style="background: #18a965">
       <div class="container-sm ">
-        <a class="navbar-brand" href="#" style="font-weight: 700; font-style: italic;">BETONATOR</a>
+        <a class="navbar-brand text-light" href="#" style="font-weight: 700; font-size: 24px;">ChampaBet</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <%= link_to "Hem", root_path, class: "nav-link pe-0 ps-4" %>
+              <%= link_to "HEM", root_path, class: "nav-link text-light pe-0 ps-4", style: "font-weight: 700; letter-spacing: 1px;" %>
             </li>
             <li class="nav-item">
-              <%= link_to "Matcher", games_path, class: "nav-link pe-0 ps-4" %>
+              <%= link_to "MATCHER", games_path, class: "nav-link text-light pe-0 ps-4", style: "font-weight: 700; letter-spacing: 1px;" %>
             </li>
+
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "PROFIL", user_path(current_user), class: "nav-link text-light pe-0 ps-4", style: "font-weight: 700; letter-spacing: 1px;" %>
+              </li>
+              <li class="nav-item">
+                <%= button_to "LOGGA UT", destroy_user_session_path, method: :delete, class: "nav-link text-light pe-0 ps-4", style: "font-weight: 700; letter-spacing: 1px;" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= button_to "LOGGA IN", new_user_session_path, method: :get, class: "nav-link text-light pe-0 ps-4", style: "font-weight: 700; letter-spacing: 1px;" %>
+              </li>
+            <% end %>
           </ul>
         </div>
       </div>
@@ -44,11 +57,11 @@
       <div class="row border-radius">
         <div class="col-lg-12">
           <% if flash[:notice].present? %>
-            <div class="alert alert-success mb-4 border-radius box-shadow">
+            <div class="alert alert-success mb-4 border-radius">
               <%= flash[:notice] %>
             </div>
           <% elsif flash[:alert].present? %>
-            <div class="alert alert-danger mb-4 border-radius box-shadow">
+            <div class="alert alert-danger mb-4 border-radius">
               <%= flash[:alert] %>
             </div>
           <% end %>

@@ -1,0 +1,21 @@
+<div class="d-flex justify-content-center">
+  <div class="border-radius bg-white border box-shadow ps-4 pe-4">
+    <h2 class="text-center mb-4 mt-4">Återställ lösenord</h2>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field mb-3">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Epost", class: "p-2 ps-3 border-radius border-0 bg-light", style: "width: 300px;"  %>
+      </div>
+
+      <div class="actions d-grid gap-2 mb-3">
+        <%= f.submit "Återställ lösenord", class: "btn btn-primary border-radius" %>
+      </div>
+    <% end %>
+
+    <%= link_to "Logga in", new_session_path(resource_name), class: "d-block text-center text-decoration-none fs-7 mb-2 p-0" %>
+    <hr class="m-0 mb-2 p-0 text-black-50">
+    <%= link_to "Bli medlem", new_registration_path(resource_name), class: "d-block text-center text-decoration-none fs-7 mb-3" %>
+  </div>
+</div>
