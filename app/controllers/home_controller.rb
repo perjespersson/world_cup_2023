@@ -59,7 +59,7 @@ class HomeController < ApplicationController
                     CASE
                       WHEN points = 0 THEN 1
                       ELSE points
-                    END AS POINTS
+                    END AS points
                   FROM
                     games_with_winners_and_points
                 ), users_with_points AS (
@@ -67,7 +67,7 @@ class HomeController < ApplicationController
                     users.name,
                     users.id AS user_id,
                     CASE
-                      WHEN winner = bet OR (winner IS NULL AND bet IS NULL) THEN points
+                      WHEN winner = bet OR (winner IS NULL AND bet IS NULL) THEN games_with_normalised_points.points
                       ELSE 0
                     END AS points
                   FROM

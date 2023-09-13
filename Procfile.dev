@@ -1,0 +1,2 @@
+server: bundle exec rails s
+mailcatcher: mailcatcher --http-ip 0.0.0.0 --http-port 1088 --smtp-port 1028 -f
