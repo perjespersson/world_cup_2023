@@ -5,11 +5,21 @@ class User < ApplicationRecord
   has_many :bets
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
-      user.full_name = auth.info.name
-      user.avatar_url = auth.info.image
+    user = User.find_by(email: auth.info.email)
+
+    if user.nil?
+      User.create(
+                  email: auth.info.email,
+                  password: Devise.friendly_token[0, 20],
+                  name: auth.info.name,
+                  avatar_url: auth.info.image,
+                  provider: auth.provider,
+                  uid: auth.uid
+                )
+    elsif user.uid.nil? || user.provider.nil? # User has not signed up through google
+      return nil
+    else
+      return user
     end
   end
 end
