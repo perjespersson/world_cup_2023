@@ -23,15 +23,13 @@
       </div>
     <% end %>
 
-    <%- resource_class.omniauth_providers.each do |provider| %>
-      <%= form_for "Login",
-        url: omniauth_authorize_path(resource_name, provider),
-        method: :post,
-        data: { turbo: "false" } do |f| %>
+    <%= form_for "Login",
+      url: omniauth_authorize_path(resource_name, :google_oauth2),
+      method: :post,
+      data: { turbo: "false" } do |f| %>
 
-        <%= f.button class: "btn btn-light bg-white border border-radius text-center mb-4", style: "width: 100%" do %>
-          <i class="bi bi-google" style="float: left; margin-right: 5px;"></i> Logga in med Google
-        <% end %>
+      <%= f.button class: "btn btn-light bg-white border border-radius text-center mb-4", style: "width: 100%" do %>
+        <i class="bi bi-google" style="float: left; margin-right: 5px;"></i> Logga in med Google
       <% end %>
     <% end %>
 

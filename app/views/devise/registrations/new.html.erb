@@ -18,10 +18,20 @@
       </div>
 
       <div class="actions d-grid gap-2 mb-3">
-        <%= f.submit "Sign up", class: "btn btn-primary border-radius" %>
+        <%= f.submit "Bli medlem", class: "btn btn-primary border-radius" %>
       </div>
     <% end %>
 
-    <%= link_to "Logga in", new_session_path(resource_name), class: "d-block text-center text-decoration-none fs-7 mb-3 p-0" %>
+    <%= form_for "Login",
+      url: omniauth_authorize_path(resource_name, :google_oauth2),
+      method: :post,
+      data: { turbo: "false" } do |f| %>
+
+      <%= f.button class: "btn btn-light bg-white border border-radius text-center mb-4", style: "width: 100%" do %>
+        <i class="bi bi-google" style="float: left; margin-right: 5px;"></i> Bli medlem med Google
+      <% end %>
+    <% end %>
+
+    <%= link_to "Logga in", new_session_path(resource_name), class: "d-block text-center text-decoration-none fs-7 mb-4 p-0" %>
   </div>
 </div>
